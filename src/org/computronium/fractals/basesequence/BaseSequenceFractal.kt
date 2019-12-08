@@ -23,7 +23,7 @@ class BaseSequenceFractal : JFrame("Base Sequence Fractal") {
         // Estimate for longest sequence in range.  Will error if too small.
         val maxSequenceLength = 30
 
-        val startingValueOfN = 70000
+        val startingValueOfN = 2
 
         centerPanel = BaseSequenceFractalPanel(startingValueOfN, maxSequenceLength)
 

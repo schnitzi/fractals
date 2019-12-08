@@ -19,7 +19,7 @@ class BaseSequenceFractalPanel(private val start: Int, private val maxSequenceLe
                 val sequenceLength = findSequenceLength(x, y)
                 val color = sequenceLength * colorMultiplier
                 g!!.color = Color(0, color, color)
-                g.fillRect((x-start)*pixelSize, y*pixelSize, pixelSize, pixelSize)
+                g.fillRect((x-start)*pixelSize, height/2 - x/2 + y*pixelSize, pixelSize, pixelSize)
                 y += pixelSize
             }
             x += pixelSize
