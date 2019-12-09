@@ -3,7 +3,7 @@ package org.computronium.fractals.basesequence
 import java.awt.Color
 import java.awt.Graphics
 
-class BaseSequenceFractalPanel(start: Int, private val maxSequenceLength: Int) : FractalPanel(start) {
+class CenteredBaseSequenceFractalPanel(start: Int, private val maxSequenceLength: Int) : FractalPanel(start) {
 
     private val pixelSize = 1
 
@@ -18,7 +18,7 @@ class BaseSequenceFractalPanel(start: Int, private val maxSequenceLength: Int) :
                 val sequenceLength = Computation.findSequenceLength(x, y)
                 val color = sequenceLength * colorMultiplier
                 g!!.color = Color(0, color, color)
-                g.fillRect((x-start)*pixelSize, y*pixelSize, pixelSize, pixelSize)
+                g.fillRect((x-start)*pixelSize, height/2 - x/2 + y*pixelSize, pixelSize, pixelSize)
                 y += pixelSize
             }
             x += pixelSize

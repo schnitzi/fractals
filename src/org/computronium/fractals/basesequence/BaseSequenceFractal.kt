@@ -1,11 +1,10 @@
 package org.computronium.fractals.basesequence
 import java.awt.BorderLayout
+import java.awt.Color
 import java.awt.Dimension
-import java.awt.event.WindowAdapter
-import java.awt.event.WindowEvent
-import javax.swing.JFrame
-import javax.swing.UIManager
-import javax.swing.WindowConstants
+import java.awt.event.*
+import javax.swing.*
+import kotlin.system.exitProcess
 
 /**
  * Panel to generate a 2D view of the algorithm described at
@@ -16,16 +15,14 @@ import javax.swing.WindowConstants
  */
 class BaseSequenceFractal : JFrame("Base Sequence Fractal") {
 
-    private var centerPanel: BaseSequenceFractalPanel
+    private val centerPanel = JTabbedPane()
 
     init {
 
-        // Estimate for longest sequence in range.  Will error if too small.
-        val maxSequenceLength = 30
-
-        val startingValueOfN = 2
-
-        centerPanel = BaseSequenceFractalPanel(startingValueOfN, maxSequenceLength)
+        addTab("Wedge start", BaseSequenceFractalPanel(2, 30))
+        addTab("7000s range", BaseSequenceFractalPanel(7000, 35))
+        addTab("70000s range", BaseSequenceFractalPanel(70000, 35))
+        addTab("Centered", CenteredBaseSequenceFractalPanel(2, 30))
 
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
         layout = BorderLayout()
@@ -34,7 +31,7 @@ class BaseSequenceFractal : JFrame("Base Sequence Fractal") {
 
         addWindowListener(object : WindowAdapter() {
             override fun windowClosing(windowEvent: WindowEvent?) {
-                System.exit(0)
+                exitProcess(0)
             }
         })
 
@@ -43,6 +40,20 @@ class BaseSequenceFractal : JFrame("Base Sequence Fractal") {
 
         this.isFocusable = true
         this.requestFocus()
+    }
+
+    private fun addTab(title: String, panel: FractalPanel) {
+
+        panel.addMouseMotionListener(object : MouseMotionAdapter() {
+            override fun mouseMoved(e: MouseEvent?) {
+                val graphics = panel.graphics
+                graphics.color = Color.BLACK
+                graphics.fillRect(15, panel.height-90-15, 100, 21)
+                graphics.color = Color.WHITE
+                graphics.drawString("" + (e!!.x + panel.start) + "," + e.y, 20, panel.height - 90)
+            }
+        })
+        centerPanel.addTab(title, panel)
     }
 
     companion object {
