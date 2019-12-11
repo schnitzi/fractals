@@ -19,10 +19,11 @@ class BaseSequenceFractal : JFrame("Base Sequence Fractal") {
 
     init {
 
-        addTab("Wedge start", BaseSequenceIntegerFractalPanel(2, 30))
-        addTab("7000s range", BaseSequenceIntegerFractalPanel(7000, 35))
-        addTab("70000s range", BaseSequenceIntegerFractalPanel(70000, 35))
-        addTab("Centered", CenteredBaseSequenceIntegerFractalPanel(2, 30))
+        addTab("Float based", FloatFractalPanel(2, 30))
+//        addTab("Wedge start", BaseSequenceIntegerFractalPanel(2, 30))
+//        addTab("7000s range", BaseSequenceIntegerFractalPanel(7000, 35))
+//        addTab("70000s range", BaseSequenceIntegerFractalPanel(70000, 35))
+//        addTab("Centered", CenteredBaseSequenceIntegerFractalPanel(2, 30))
 
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
         layout = BorderLayout()
@@ -42,7 +43,7 @@ class BaseSequenceFractal : JFrame("Base Sequence Fractal") {
         this.requestFocus()
     }
 
-    private fun addTab(title: String, panel: IntegerFractalPanel) {
+    private fun addTab(title: String, panel: JPanel) {
 
         panel.addMouseMotionListener(object : MouseMotionAdapter() {
             override fun mouseMoved(e: MouseEvent?) {
@@ -50,7 +51,7 @@ class BaseSequenceFractal : JFrame("Base Sequence Fractal") {
                 graphics.color = Color.BLACK
                 graphics.fillRect(15, panel.height-90-15, 100, 21)
                 graphics.color = Color.WHITE
-                graphics.drawString("" + (e!!.x + panel.startValue) + "," + e.y, 20, panel.height - 90)
+//                graphics.drawString("" + (e!!.x + panel.startValue) + "," + e.y, 20, panel.height - 90)
             }
         })
         centerPanel.addTab(title, panel)
